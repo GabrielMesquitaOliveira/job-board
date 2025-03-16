@@ -12,7 +12,14 @@ class JobController extends Controller
      */
     public function index()
     {
-        return view('job.index', ['jobs'=>JobBoard::all()]);
+        $jobs = JobBoard::query();
+
+        $jobs->when(request('search'), function ($query, $search) {
+            $query->where('title', 'like', '%' . $search . '%')
+                ->orWhere('description', 'like', '%' . $search . '%');
+        });
+
+        return view('job.index', ['jobs' => $jobs->get()]);
     }
 
     /**
@@ -36,7 +43,7 @@ class JobController extends Controller
      */
     public function show(JobBoard $job)
     {
-        return view('job.show', ['job'=>$job]);
+        return view('job.show', ['job' => $job]);
     }
 
     /**
