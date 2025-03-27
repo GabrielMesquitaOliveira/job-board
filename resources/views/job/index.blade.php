@@ -3,12 +3,12 @@
       :links="['Jobs' => route('jobs.index')]" />
 
     <x-card class="mb-4 text-sm">
-      <form action="{{ route('jobs.index') }}" method="GET">
+      <form id="filtering-form" action="{{ route('jobs.index') }}" method="GET">
         <div class="mb-4 grid grid-cols-2 gap-4">
           <div>
             <div class="mb-1 font-semibold">Search</div>
             <x-text-input name="search" value="{{ request('search') }}"
-              placeholder="Search for any text" />
+              placeholder="Search for any text" form-id="filtering-form"/>
           </div>
           <div>
             <div class="mb-1 font-semibold">Salary</div>
