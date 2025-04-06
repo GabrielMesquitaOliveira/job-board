@@ -66,6 +66,6 @@ class JobBoardPolicy
 
     public function apply(User $user, JobBoard $job): bool
     {
-        return false;
+        return !$job->hasUserApplied($user);
     }
 }
