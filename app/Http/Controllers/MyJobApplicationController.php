@@ -10,10 +10,10 @@ class MyJobApplicationController extends Controller
     {
         $applications = auth()->user()->jobApplications()
             ->with([
-                'job' => function ($query) {
+                'job_board' => function ($query) {
                     $query->withCount('jobApplications')
                           ->withAvg('jobApplications', 'expected_salary')
-                          ->with('employer'); // carrega employer junto
+                          ->with('employer');
                 }
             ])
             ->latest()
